@@ -1,28 +1,48 @@
 'use client'
-import react, { useState } from 'react'
+import react, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 
 const QuizPage = () => {
-
     const router = useRouter();
-    const finishQuiz = () => {
-        console.log(fName, lName, age, sex)
-        if(fName != "" && lName != "" && age != "" && sex != ""){
-            /*Put post req here
-            parseInt(age)
-            */
-           
-           router.push('/annotate')
-        } else {
-            alert("Please fill up all fields")
-        }
-    }   
+
+    useEffect(() => {
+    var userID = localStorage.getItem('userID');
+    if(userID != null) {
+        router.push('/annotate')
+    }
+    }, []);
 
     const [fName, setFName] = useState("")
     const [lName, setLName] = useState("")
     const [age, setAge] = useState("")
     const [sex, setSex] = useState("")
+
+    const finishQuiz = async () => {
+        if(fName != "" && lName != "" && age != "" && sex != ""){
+            const response = await fetch("/api/user", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    first_Name: fName,
+                    last_Name: lName,
+                    age,
+                    sex,
+                }),
+            }).then(async data => {
+                let test = await data.json()
+                localStorage.setItem('userID', test.user._id);
+                if(data.status == 201){
+                router.push('/annotate')
+                }
+            })
+            
+        } else {
+            alert("Please fill up all fields")
+        }
+    }   
 
     return(
         <div id='quiz_main'>
