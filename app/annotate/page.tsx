@@ -70,7 +70,7 @@ const AnnotationPage = () => {
                 }
                 fetchUser(userID)
                 fetchTweet()
-                setScore("") // ✅ this now unchecks all radios
+                setScore("")
             }
         }
     }
