@@ -1,29 +1,31 @@
-GET http://localhost:3001/api/tweet
+GET http://localhost:3000/api/tweet
 
 ###
 
-PATCH http://localhost:3001/api/tweet
+PATCH http://localhost:3000/api/tweet
 Content-Type: application/json
 
 {
-    "id": "68dced8e6c5797dc743b9c46",
-    "newLabel": 1
+    "id": "68e3dd83f59e2966d34d4444",
+    "newLabel": 7
 }
 
 ###
-GET http://localhost:3001/api/user?id=68dd0047747b63e5dc91d56e
+GET http://localhost:3000/api/user?id=68e24ab75c591cce776f245d
 
 
 
 ###
-POST http://localhost:3001/api/user
+POST http://localhost:3000/api/user
 Content-Type: application/json
 
 {
-    "first_Name": "Testa",
+    "first_Name": "Test",
     "last_Name": "Test",
     "age": 21,
-    "sex": "m"
+    "sex": "m",
+    "email": "TEST@gmail.com",
+    "password": "test"
 }
 
 ###
@@ -33,4 +35,13 @@ Content-Type: application/json
 {
     "id": "68dd0047747b63e5dc91d56e"
 
+}
+
+###
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+    "email": "TEST@gmail.com",
+    "password": "test"
 }

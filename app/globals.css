@@ -59,17 +59,57 @@ option {
   background: var(--background);
 }
 
+h1{
+  font-size: 30;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h5{
+  font-size: 12;
+}
+
+#choice {
+  margin-left: 0vw;
+}
+
+#welcome{
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
 #home_main {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#inq{
+  margin: 5vh;
+}
+
+#home_text {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  max-width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1vh;
 }
 
 #quiz_main {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -77,6 +117,13 @@ option {
   margin-top: 1vh;
   justify-content: center;
   align-items: center;
+  width: 18vw;
+}
+
+#gender_div {
+  margin-top: 1vh;
+  width: 18vw;
+
 }
 
 #holder {
@@ -88,20 +135,56 @@ option {
 #likert
 {
   display: flex;
-  margin: 0 auto;
+  justify-content: space-between;
+  min-width: 45vw;
+}
+
+#nextButton{
+  margin-top: 2vh;
 }
 
 #option {
   margin-left: 1vh;
 }
 
-#tweet {
+#tweetHolder {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  min-width: 50vw;
+  min-height: 20vh;
+  border: #ededed;
+  border-radius: 2px;
+  border-style: solid;
   text-align: center;
+
   margin-top: 3vh;
   margin-bottom: 5vh;
 }
 
+#tweet {
+  text-align: center;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
 #legend {
   text-align: center;
+  margin-bottom: 3vh;
+}
+
+#thank_text {
+  max-width: 60vw;
+  text-align: center;
+  margin-top: 5vh;
+}
+
+#quiz_button {
+  margin: 2vh;
+}
+
+#quiz_link {
+  margin: 3vh;
+  text-decoration: underline;
 }
   

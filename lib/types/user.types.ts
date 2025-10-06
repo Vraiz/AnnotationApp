@@ -4,5 +4,7 @@ export interface IUser {
     last_Name: string
     age: number
     sex: string
+    email: string
+    password: string
     label_Count: number
 }
