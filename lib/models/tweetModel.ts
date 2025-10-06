@@ -18,6 +18,7 @@ const tweetSchema = new Schema<ITweet>({
     },
     labels: {
         type:[Number],
+        default:[0,0,0,0,0,0,0]
     },
     labelCount: {
         type:Number,
@@ -41,26 +42,28 @@ tweetSchema.static(
 tweetSchema.static(
   "editTweet",
   async function editTweet(id: string, newLabel: number) {
-    const tweet_Value = await this.findOne({_id: id})
+    const tweet = await this.findById(id);
 
-    if (tweet_Value == null){
-        throw new Error("tweet not found");
-    } 
-
-    try{
-      const tweet = await this.findOneAndUpdate(
-        { _id: id },
-        { $push: {labels: newLabel}, $inc: {labelCount: 1 }  },
-        { new: true }
-      );
-
-      return tweet;
-    } catch (e){
-      console.log("here")
-      throw new Error("Problem editing tweet");
+    if (!tweet) {
+      throw new Error("tweet not found");
     }
+
+    if (!Array.isArray(tweet.labels)) {
+      tweet.labels = []; // create it if missing
+    }
+
+    while (tweet.labels.length <= newLabel) {
+      tweet.labels.push(0); // fill with zeros up to the needed index
+    }
+
+    tweet.labels[newLabel] += 1;
+    tweet.labelCount = (tweet.labelCount || 0) + 1;
+
+    await tweet.save();
+
+    return tweet;
   }
-)
+);
 
 tweetSchema.static(
   "getTweet",

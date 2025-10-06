@@ -1,11 +1,13 @@
 'use client'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'
 import styles from './page.module.css';
 
 export default function Home() {
 
   const router = useRouter();
+
+  const [linkValue, setLink] = useState("/Register")
 
   useEffect(() => {
     const userID = localStorage.getItem('userID');

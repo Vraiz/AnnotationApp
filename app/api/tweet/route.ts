@@ -26,7 +26,7 @@ export const PATCH = async (request: Request) => {
 
     const { id, newLabel } = await request.json();
 
-    const tweets = await tweet.editTweet(id, newLabel);
+    const tweets = await tweet.editTweet(id, newLabel-1);
 
     return NextResponse.json({
       message: "Successfully edited tweet",
@@ -35,7 +35,7 @@ export const PATCH = async (request: Request) => {
 
   } catch (error) {
     return NextResponse.json({
-      message: "An error occurred whilst editing tweet"
+      message: error.message
     }, { status: 500 });
   }
 };
