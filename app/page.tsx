@@ -7,7 +7,7 @@ export default function Home() {
 
   const router = useRouter();
 
-  const [linkValue, setLink] = useState("/Register")
+  const [linkValue, setLink] = useState("/Login")
 
   useEffect(() => {
     const userID = localStorage.getItem('userID');
