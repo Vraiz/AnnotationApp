@@ -1,0 +1,19 @@
+.login-bg {
+    background: linear-gradient(45deg,#ff8a00, #e52e71);
+    width:100vw;
+    height:100vh;
+    background-size: cover;
+    background-position: center;
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+#quiz_main{
+    background-color: white;
+    width: 50vw;
+    height: 50vh;
+    margin: 20vh auto;
+    
+}

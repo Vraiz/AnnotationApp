@@ -2,6 +2,7 @@
 import react, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from "next/link";
+import "./login.css";
 
 
 
@@ -51,12 +52,14 @@ const Login = () => {
     }   
 
     return(
+        <div className = 'login-bg'>
         <div id='quiz_main'>
                 <h1>Log in</h1>
                 <div id='quiz_div'><h3>Email: </h3><input type="email" name='email' placeholder='example.com' value={email} onChange={(e) => setEmail(e.target.value)}/></div>
                 <div id='quiz_div'><h3>Password: </h3><input type="password" name='password' placeholder='' value={password} onChange={(e) => setPassword(e.target.value)}/></div>
                 <button id='quiz_button' onClick={finishQuiz}>Register</button>
                 <Link id='quiz_link' href="/Register">Don't have an account yet? Register here!</Link>
+        </div>
         </div>
     )
 }
