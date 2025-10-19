@@ -102,15 +102,6 @@ h5{
   margin: 1vh;
 }
 
-#quiz_main {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-
 #quiz_div {
   margin-top: 1vh;
   justify-content: center;

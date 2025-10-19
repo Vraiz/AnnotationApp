@@ -18,20 +18,6 @@ export default function Home() {
 
   return (
     <>
-      <header className={styles.navbar}>
-        <div className={styles.logo}>🅱</div>
-
-        <nav className={styles.navLinks}>
-          <a href="#">Consent Form</a>
-          <a href="#">Contact</a>
-          <a href="#">About</a>
-        </nav>
-
-        <div className={styles.authButtons}>
-          <button className={styles.btnOutline}>Sign in</button>
-          <button className={styles.btnDark}>Register</button>
-        </div>
-      </header>
 
       {/* Hero Section */}
       <main className={styles.hero}>
@@ -42,7 +28,7 @@ export default function Home() {
         </div>
 
         <div className={styles.heroButtons}>
-          <button className={styles.btnOutline}>
+          <button className={styles.btnOutline} onClick = {() => {router.push("/Login")}}>
             ⭐ Get Started
           </button>
         </div>

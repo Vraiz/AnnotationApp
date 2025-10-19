@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { useRouter } from "next/navigation";
+import styles from "../page.module.css";
 
 const globalHeader = () => {
     const router = useRouter();
@@ -38,21 +39,26 @@ const globalHeader = () => {
         router.push('/Login');
     }
 
+    const handleRegister = () => {
+        router.push('/Register');
+    }
+
     return (
-        <div id = "global_header">
-            <div id = "header_subset">
-                <div>
-                    <a href = "/">Home</a>
-                </div> 
-                <div>
-                    {isLoggedIn ? (
-                        <button onClick={handleLogout}>Logout</button>
-                    ) : (
-                        <button onClick={handleLogin}>Login</button>
-                    )}
-                </div>
-            </div>
+        <header className={styles.navbar}>
+        <div className={styles.logo}>Home</div>
+
+        <nav className={styles.navLinks}>
+        <a href = "/">Home</a>
+          <a href="#">Consent Form</a>
+          <a href="#">Contact</a>
+          <a href="#">About</a>
+        </nav>
+
+        <div className={styles.authButtons}>
+          <button type = "button" className={styles.btnOutline} onClick={handleLogin}>Sign in</button>
+          <button className={styles.btnDark} onClick={handleRegister}>Register</button>
         </div>
+      </header>
     )
 }
 

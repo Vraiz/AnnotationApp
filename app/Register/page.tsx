@@ -2,6 +2,7 @@
 import react, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from "next/link";
+import "../page.module.css"
 
 
 
@@ -55,6 +56,7 @@ const Register = () => {
     }   
 
     return(
+        <div className = "login-bg">
         <div id='quiz_main'>
                 <h1>Register</h1>
                 <div id='quiz_div'><h3>First Name: </h3><input type="text" name='fName' placeholder='First Name' value={fName} onChange={(e) => setFName(e.target.value)}/></div>
@@ -73,6 +75,7 @@ const Register = () => {
                 <div id='quiz_div'><h3>Confirm Password: </h3><input type="password" name='confirmPassword' placeholder='' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/></div>
                 <button id='quiz_button' onClick={finishQuiz}>Register</button>
                 <Link id='quiz_link' href="/Login">Already have an account? Log in here!</Link>
+        </div>
         </div>
     )
 }
