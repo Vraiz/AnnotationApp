@@ -57,7 +57,7 @@ const Login = () => {
                 <h1>Log in</h1>
                 <div id='quiz_div'><h3>Email: </h3><input type="email" name='email' placeholder='example.com' value={email} onChange={(e) => setEmail(e.target.value)}/></div>
                 <div id='quiz_div'><h3>Password: </h3><input type="password" name='password' placeholder='' value={password} onChange={(e) => setPassword(e.target.value)}/></div>
-                <button id='quiz_button' onClick={finishQuiz}>Register</button>
+                <button id='quiz_button' onClick={finishQuiz}>Register</button><br/>
                 <Link id='quiz_link' href="/Register">Don't have an account yet? Register here!</Link>
         </div>
         </div>
