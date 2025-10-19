@@ -50,14 +50,22 @@ const Login = () => {
     }   
 
     return(
-        <div className = 'login-bg'>
-            <div id='quiz_main'>
+        <div>
+            <div className = 'login-bg'></div>
+            <form className='quiz_main' onSubmit={finishQuiz}>
                 <h1>Log in</h1>
-                <div id='quiz_div'><h3>Email: </h3><input type="email" name='email' placeholder='example.com' value={email} onChange={(e) => setEmail(e.target.value)}/></div>
-                <div id='quiz_div'><h3>Password: </h3><input type="password" name='password' placeholder='' value={password} onChange={(e) => setPassword(e.target.value)}/></div>
-                <button id='quiz_button' onClick={finishQuiz}>Register</button><br/>
+
+                <div className='input-group'>
+                    <label htmlFor='email'>Email: </label>
+                    <input type="email" name='email' placeholder='example.com' value={email} onChange={(e) => setEmail(e.target.value)}/>
+                </div>
+                <div className='input-group'>
+                    <label htmlFor='password'>Password:</label>
+                    <input type="password" name='password' placeholder='' value={password} onChange={(e) => setPassword(e.target.value)}/>
+                </div>
+                <button type="submit" id="log-button">Login</button><br/>
                 <Link id='quiz_link' href="/Register">Don't have an account yet? Register here!</Link>
-            </div>
+            </form>
         </div>
     )
 }

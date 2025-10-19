@@ -2,7 +2,7 @@
 import react, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from "next/link";
-import "../page.module.css"
+import "./register.css";
 
 
 
@@ -17,9 +17,11 @@ const Register = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
+    const [isFilipino, setIsFilipino] = useState(false)
+    const [isFluent, setIsFluent] = useState(false)
 
     const finishQuiz = async () => {
-        if(fName != "" && lName != "" && age != "" && sex != "" && email != "" && password != "" && confirmPassword != "" && password == confirmPassword){
+        if(fName && lName && age && sex && email && password && confirmPassword && password == confirmPassword && isFilipino && isFluent){
             try{
                 const response = await fetch("/api/user", {
                 method: "POST",
@@ -56,26 +58,56 @@ const Register = () => {
     }   
 
     return(
-        <div className = "login-bg">
-        <div id='quiz_main'>
-                <h1>Register</h1>
-                <div id='quiz_div'><h3>First Name: </h3><input type="text" name='fName' placeholder='First Name' value={fName} onChange={(e) => setFName(e.target.value)}/></div>
-                <div id='quiz_div'><h3>Last Name: </h3><input type="text" name='lName' placeholder='Last Name' value={lName} onChange={(e) => setLName(e.target.value)}/></div>
-                <div id='quiz_div'><h3>Age: </h3><input type="number" name='age' placeholder='age' value={age} onChange={(e) => setAge(e.target.value)}/></div>
-                <div id='gender_div'>
-                    <label>Gender:</label>
-                    <select id="Sex" name="Sex" value={sex} onChange={(e) => setSex(e.target.value)}>
-                    <option hidden>Gender</option>
-                    <option value="m">Male</option>
-                    <option value="f">Female</option>
-                    </select>
+        <div className = "register-bg">
+            <div id='register_main'>
+                <h1>Account Registration</h1>
+                <div className='input-row'>
+                    <div className = 'input-group'>
+                        <h3>First Name: </h3>
+                        <input type="text" name='fName' placeholder='First Name' value={fName} onChange={(e) => setFName(e.target.value)}/>    
+                    </div>
+                    <div className='input-group'>
+                        <h3>Last Name: </h3>
+                        <input type="text" name='lName' placeholder='Last Name' value={lName} onChange={(e) => setLName(e.target.value)}/>   
+                    </div>
                 </div>
-                <div id='quiz_div'><h3>Email: </h3><input type="email" name='email' placeholder='example.com' value={email} onChange={(e) => setEmail(e.target.value)}/></div>
-                <div id='quiz_div'><h3>Password: </h3><input type="password" name='password' placeholder='' value={password} onChange={(e) => setPassword(e.target.value)}/></div>
-                <div id='quiz_div'><h3>Confirm Password: </h3><input type="password" name='confirmPassword' placeholder='' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/></div>
-                <button id='quiz_button' onClick={finishQuiz}>Register</button>
-                <Link id='quiz_link' href="/Login">Already have an account? Log in here!</Link>
-        </div>
+                <div className="input-row">
+                <div className='input-group'>
+                    <h3>Gender:</h3>
+                        <select id="Sex" name="Sex" value={sex} onChange={(e) => setSex(e.target.value)}>
+                        <option hidden>Gender</option>
+                        <option value="m">Male</option>
+                        <option value="f">Female</option>
+                        </select>
+                    </div>
+                    <div className='input-group'>
+                        <h3>Age: </h3>
+                        <input type="number" name='age' placeholder='age' value={age} onChange={(e) => setAge(e.target.value)}/>
+                    </div>
+                </div>
+                <div className='input-group'>
+                    <h3>Email: </h3>
+                    <input type="email" name='email' placeholder='example.com' value={email} onChange={(e) => setEmail(e.target.value)}/>
+                </div>
+                <div className='input-group'>
+                    <h3>Password: </h3>
+                    <input type="password" name='password' placeholder='' value={password} onChange={(e) => setPassword(e.target.value)}/>
+                </div>
+                <div className='input-group'>
+                    <h3>Confirm Password: </h3>
+                    <input type="password" name='confirmPassword' placeholder='' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+                </div>
+                <div className="checkbox-group">
+                    <label>
+                        <input type="checkbox" checked={isFilipino} onChange={(e) => setIsFilipino(e.target.checked)}/>{" "} Are you a Filipino citizen?
+                    </label>
+                    <label>
+                        <input type="checkbox" checked={isFluent} onChange={(e) => setIsFluent(e.target.checked)}/> Can you read/speak both Filipino and English fluently?
+                    </label>
+                </div>
+                <button className='register-button' onClick={finishQuiz}>Register</button>
+                <Link className='login-link' href="/Login">Already have an account? Log in here!</Link>
+            </div>
         </div>
     )
 }
