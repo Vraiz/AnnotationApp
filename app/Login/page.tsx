@@ -19,6 +19,7 @@ const Login = () => {
 
     const finishQuiz = async () => {
         if(email != "" && password != ""){
+            console.log("check");
             try{
                 const response = await fetch("/api/login", {
                     method: "POST",
@@ -28,18 +29,17 @@ const Login = () => {
                     body: JSON.stringify({
                         email: email,
                         password: password
-                    }),
-                }).then(async data => {
-                        let test = await data.json()
-                            if (test.message == "Successfully logged in"){
-                                localStorage.setItem('userID', test.user._id);
-                                if(data.status == 201){
-                                router.push('/annotate')
-                            } else {
-                                alert("Invalid email/password")
-                            }
-                        }
-                })
+                    })
+                });
+                
+                const data = await response.json();
+
+                if (response.status === 201 && data.message === "Successfully logged in"){
+                    localStorage.setItem("userID", data.user._id);
+                    router.push("/annotate");
+                } else {
+                    alert("Invalid email/password");
+                }
             }catch (e){
                 alert("Something went wrong with the server")
             }
@@ -52,7 +52,7 @@ const Login = () => {
     return(
         <div>
             <div className = 'login-bg'></div>
-            <form className='quiz_main' onSubmit={finishQuiz}>
+            <form className='quiz_main' onSubmit={(e) => {e.preventDefault(); finishQuiz();}}>
                 <h1>Log in</h1>
 
                 <div className='input-group'>

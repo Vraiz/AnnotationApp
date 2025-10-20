@@ -55,8 +55,14 @@ const globalHeader = () => {
         </nav>
 
         <div className={styles.authButtons}>
-          <button type = "button" className={styles.btnOutline} onClick={handleLogin}>Sign in</button>
-          <button className={styles.btnDark} onClick={handleRegister}>Register</button>
+            {isLoggedIn ? (
+                <button className={styles.btnDark} onClick={handleLogout}>Logout</button>
+            ) : (
+                <>
+                    <button type = "button" className={styles.btnOutline} onClick={handleLogin}>Sign in</button>
+                    <button className={styles.btnDark} onClick={handleRegister}>Register</button>
+                </>
+            )}
         </div>
       </header>
     )
