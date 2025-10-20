@@ -115,12 +115,6 @@ h5{
 
 }
 
-#holder {
-  display: inline-block;
-  justify-content: center;
-  align-items: center;
-}
-
 #likert
 {
   display: flex;
@@ -134,21 +128,6 @@ h5{
 
 #option {
   margin-left: 1vh;
-}
-
-#tweetHolder {
-  display: flex;
-  justify-content: center;
-  align-items: center; 
-  min-width: 50vw;
-  min-height: 20vh;
-  border: #ededed;
-  border-radius: 2px;
-  border-style: solid;
-  text-align: center;
-
-  margin-top: 3vh;
-  margin-bottom: 5vh;
 }
 
 #tweet {

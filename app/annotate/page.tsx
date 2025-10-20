@@ -85,98 +85,41 @@ const AnnotationPage = () => {
 
     return (
         <div id='quiz_main'>
-                <h3>Please rate this tweet based on the positivity/negativity of it's tone.</h3>
-                <h3>Click one of the circles to select the rating and press the next button to submit and move to the next tweet</h3>
-                <div id="tweetHolder">{tweet.content}</div>
-                <div id="holder">
-                    <div id="likert">
-                        <ul id="likert">
-                            <li>
-                                <input
-                                    id="choice"
-                                    type="radio"
-                                    name="rating"
-                                    value="1"
-                                    checked={score === "1"}
-                                    onChange={(e) => setScore(e.target.value)}
-                                />
-                                <h5>Very negative</h5>
-                            </li>
-                            <li>
-                                <input
-                                    id="choice"
-                                    type="radio"
-                                    name="rating"
-                                    value="2"
-                                    checked={score === "2"}
-                                    onChange={(e) => setScore(e.target.value)}
-                                />
-                                <h5>Negative</h5>
-                            </li>
-                            <li>
-                                <input
-                                    id="choice"
-                                    type="radio"
-                                    name="rating"
-                                    value="3"
-                                    checked={score === "3"}
-                                    onChange={(e) => setScore(e.target.value)}
-                                />
-                                <h5>Somewhat negative</h5>
-                            </li>
-                            <li>
-                                <input
-                                    id="choice"
-                                    type="radio"
-                                    name="rating"
-                                    value="4"
-                                    checked={score === "4"}
-                                    onChange={(e) => setScore(e.target.value)}
-                                />
-                                <h5>Neutral</h5>
-                            </li>
-                            <li>
-                                <input
-                                    id="choice"
-                                    type="radio"
-                                    name="rating"
-                                    value="5"
-                                    checked={score === "5"}
-                                    onChange={(e) => setScore(e.target.value)}
-                                />
-                                <h5>Somewhat postitive</h5>
-                            </li>
-                             <li>
-                                <input
-                                    id="choice"
-                                    type="radio"
-                                    name="rating"
-                                    value="6"
-                                    checked={score === "6"}
-                                    onChange={(e) => setScore(e.target.value)}
-                                />
-                                <h5>Postitive</h5>
-                            </li>
-                            <li>
-                                <input
-                                    id="choice"
-                                    type="radio"
-                                    name="rating"
-                                    value="7"
-                                    checked={score === "7"}
-                                    onChange={(e) => setScore(e.target.value)}
-                                />
-                                <h5>Very positive</h5>
-                            </li>
-                        </ul>
+                <div className = "annotation-card">
+                    <div className = "annotation-avatar"></div>
+                    <div className = "annotation-content">
+                        <div className = "annotation-header">
+                            <span className = "annotation-name">Anonymous</span>
+                            <span className = "annotation-handle">@Anonymous</span>
+                            <span className = "annotation-date">Month DD</span>
+                        </div>
+                        <div id="tweetHolder">{tweet.content}</div>
                     </div>
                 </div>
-                <div id="tweet">
-                    <button id="nextButton" onClick={loadTweet}>next</button>
-                    <button id="nextButton" onClick={skip}>skip</button>
+                <h3>Please rate this tweet based on the positivity/negativity of it's tone.</h3>
+                <h3>Click one of the circles to select the rating and press the next button to submit and move to the next tweet</h3>
+                <div className = "annotation-rating">
+                    {[
+                        {value: "1", label: "Very Negative"},
+                        {value: "2", label: "Negative"},
+                        {value: "3", label: "Somewhat Negative"},
+                        {value: "4", label: "Neutral"},
+                        {value: "5", label: "Somewhat Positive"},
+                        {value: "6", label: "Positive"},
+                        {value: "7", label: "Very Positive"},
+                    ].map((option) => (
+                        <label key={option.value} className="rating-option">
+                            <input type = "radio" name = "rating" value = {option.value} checked = {score===option.value} onChange={(e) => setScore(e.target.value)}/>
+                            {option.label}
+                        </label>
+                    ))}
                 </div>
-                <div id="tweet">
-                    <h3 id="legend">{userData.label_Count % 100 || null}/100</h3>
+                <div className="annotation-progress">
+                    Progress: {userData.label_Count % 100 || null}/100
+                </div>
+                <div className="annotation-buttons">
+                    <button className="annotation-btn annotation-btn--primary" onClick={loadTweet}>next</button>
+                    <button id="annotation-btn annotation-btn--primary" onClick={skip}>skip</button>
                 </div>
         </div>
     );
