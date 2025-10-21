@@ -1,26 +1,18 @@
 'use client'
 import { usePathname } from 'next/navigation'
 import LoginModal from '../LoginModal'
-import { useState, useEffect } from 'react'
+import { useLoginModal } from '../../hooks/useLoginModal'
 
 const ModalProvider = () => {
   const pathname = usePathname()
-  const [showModal, setShowModal] = useState(false)
+  const loginModal = useLoginModal()
 
-  // Open login modal only when visiting /login
-  useEffect(() => {
-    if (pathname === '/login') {
-      setShowModal(true)
-    } else {
-      setShowModal(false)
-    }
-  }, [pathname])
-
-  const handleClose = () => setShowModal(false)
+  // Show modal if either pathname is /login OR Zustand store says it's open
+  const shouldShowModal = pathname === '/login' || loginModal.isOpen
 
   return (
     <>
-      {showModal && <LoginModal onClose={handleClose} />}
+      {shouldShowModal && <LoginModal onClose={loginModal.close} />}
     </>
   )
 }

@@ -3,19 +3,12 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'
 import TweetAnnotation from "./components/TweetAnnotation";
-import LoginModal from './components/LoginModal'
 import RegisterModal from './components/RegisterModal'
 import styles from './page.module.css';
 
 export default function Home() {
 
-    const [showModal, setShowModal] = useState(true)
     const [showRegister, setShowRegister] = useState(false)
-
-    const handleClose = () => {
-        setShowModal(false)
-        router.push('/') // redirect to homepage when closing
-    }
 
     const router = useRouter();
     const [linkValue, setLink] = useState("/Login")
@@ -100,7 +93,6 @@ export default function Home() {
         </section>
 
         {/* Modals */}
-        {showModal && <LoginModal onClose={handleClose} />}
         {showRegister && <RegisterModal onClose={() => setShowRegister(false)} />}
     </main>
   );
