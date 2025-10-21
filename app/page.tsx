@@ -35,11 +35,11 @@ export default function Home() {
       </section>
 
       <section className={styles.heroRight}>
-        <img
-          src="/laugh.png"
-          alt="Emoji"
-          className={styles.heroImage}
-        />
+
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <h1 className={styles.heroTitle}>Hello!</h1>
+          <img src="/laugh.png" alt="Emoji" className={styles.heroImage} />
+        </div>
 
         <div className={styles.radioGroup}>
           <label>
@@ -62,11 +62,11 @@ export default function Home() {
       <div className={styles.researchLeft}>
         <h2 className={styles.researchHeading}>Why Participate in Our Research?</h2>
         <h3 className={styles.researchSubheading}>
-          Anyone with Filipino citizenship can join!
+          Anyone with Filipino citizenship in the Philippines can join!
         </h3>
         <p className={styles.researchText}>
-          Our research focuses on annotating emojis to make Filipino Natural
-          Language Processing (NLP) more accurate and culturally aware.
+          Contributing to our research in Filipino Natural Language Processing (NLP) 
+	        can help open opportunities into further research and technologies.
         </p>
         <p className={styles.researchText}>
           By joining, you’ll help develop technology that better understands Filipino
@@ -91,12 +91,10 @@ export default function Home() {
           <h2>About our Research</h2>
           <p className={styles.subtext}>We are 4th year students in DLSU</p>
           <p>
-            Body text for your whole article or post. We’ll put in some lorem ipsum to show
-            how a filled-out page might look:
-          </p>
-          <p>
-            Excetupeur efficient emerging, minim veniam anim aute carefully curated Ginza
-            conversation exquisite perfect nostrud nisi intricate content.
+            We are researching NLP specifically how the Filipino social media shapes the sentiment of 
+            emojis. We are interested in finding the characteristics patterns and trends that differ how 
+            Filipinos use emojis compared to how users from different cultures and nations use them. 
+            This research also seeks to contribute to the growing pool of Filipino NLP resources.
           </p>
         </div>
 
@@ -139,7 +137,15 @@ export default function Home() {
           <div className={styles.imagePlaceholder}></div>
           <div>
             <h3>Isaac Javid</h3>
-            <p>Body text for whatever you'd like to say.</p>
+            <p>
+              4th year college student studying 
+              computer science in De La Salle 
+              University. 
+            </p>
+            <br></br>
+            <p>
+              Email: isaac_javid@dlsu.edu.ph
+            </p>
           </div>
         </div>
 
