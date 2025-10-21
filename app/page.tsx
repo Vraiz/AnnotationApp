@@ -9,13 +9,6 @@ export default function Home() {
 
   const [linkValue, setLink] = useState("/Login")
 
-  useEffect(() => {
-    const userID = localStorage.getItem('userID');
-    if (userID != null) {
-      router.push('/annotate');
-    }
-  }, []);
-
   return (
     <>
 

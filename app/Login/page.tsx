@@ -1,5 +1,5 @@
 'use client'
-import react, { useEffect, useState } from 'react'
+import react, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from "next/link";
 import "./login.css";
@@ -7,12 +7,6 @@ import "./login.css";
 const Login = () => {
     const router = useRouter();
 
-    useEffect(() => {
-    var userID = localStorage.getItem('userID');
-    if(userID != null) {
-        router.push('/annotate')
-    }
-    }, []);
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
