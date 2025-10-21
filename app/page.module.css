@@ -363,25 +363,6 @@
   background-color: #fff;
 }
 
-.radioGroup {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0 1.5rem 0 0;
-}
-
-.radioGroup label {
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  color: #1E1E1E;
-}
-
-.radioGroup input[type="radio"] {
-  accent-color: #2C2C2C;
-}
-
-
 /* Shared spacing */
 .researchSection,
 .meetResearchers {
@@ -520,4 +501,31 @@
   border-radius: 8px;
   object-fit: cover;
   /* background-color: #E3E3E3; placeholder bg; */
+}
+
+.radioGroup {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.radioLabel {
+  color: #fffbfb;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.radioLabel:hover {
+  background-color: #3a3a3a;
+}
+
+.radioLabel input[type="radio"] {
+  accent-color: #888;
+  transform: scale(1.2);
 }

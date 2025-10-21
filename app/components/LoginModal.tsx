@@ -44,12 +44,22 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
 
         <div className="input-group">
           <label>Email</label>
-          <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
+          <input 
+            type="email" 
+            value={email} 
+            onChange={e => setEmail(e.target.value)} 
+            placeholder="example@email.com"
+          />
         </div>
 
         <div className="input-group">
           <label>Password</label>
-          <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+          <input 
+            type="password" 
+            value={password} 
+            onChange={e => setPassword(e.target.value)} 
+            placeholder="••••••••"
+          />
         </div>
 
         <button className="btn-primary" onClick={handleLogin}>Login</button>

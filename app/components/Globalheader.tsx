@@ -10,7 +10,7 @@ export default function GlobalHeader() {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <span className="icon">❓</span>
+        <span className="icon">🖥️</span>
         <span className="nav-title">CeLT lab</span>
       </div>
       <div className="navbar-right">

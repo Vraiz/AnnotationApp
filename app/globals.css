@@ -136,8 +136,15 @@ body {
 }
 
 /* BUTTONS */
+.sample-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
 .sample-submit {
-  background-color: #2b2b2b; /* Deep blue tone */
+  background-color: #1b1d1b; /* Deep blue tone */
   color: white;
   border: none;
   border-radius: 8px;
@@ -147,12 +154,33 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
   display: block;
-  margin: 20px auto; /* centers the button horizontally */
+ 
 }
+
 .sample-submit:hover {
-  background-color: #3c3c3c; /* slightly lighter blue */
+  background-color: #4b5563; /* slightly lighter blue */
   transform: translateY(-2px);
 }
+
+.sample-skip {
+  background-color: #1b1d1b; /* Deep blue tone */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: block;
+}
+
+.sample-skip:hover {
+  background-color: #4b5563; /* Lighter grey on hover */
+  border-color: #4b5563;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(55, 65, 81, 0.3);
+}
+
 .btn-primary {
   background-color: #3c702c; /* Deep blue tone */
   color: white;
@@ -165,19 +193,45 @@ body {
   transition: background-color 0.3s ease, transform 0.2s ease;
   display: block;
   /* margin: 40px auto; centers the button horizontally */
-  widht:fit-content;
+  /* width:fit-content; */
 }
 
 .btn-primary:hover {
-  background-color: #274aa3; /* slightly lighter blue */
+  background-color: #498636; /* slightly lighter blue */
   transform: translateY(-2px);
 }
 
 .btn-primary:active {
-  background-color: #162c6e; /* darker tone when clicked */
+  background-color: #3c702c; /* darker tone when clicked */
   transform: translateY(0);
 }
 
+/*Radio group*/
+.radioGroup {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.radioLabel:hover {
+  background-color: #3a3a3a;
+}
+
+.radioLabel input[type="radio"] {
+  accent-color: #888;
+  transform: scale(1.2);
+}
 
 #choice {
   margin-left: 0vw;

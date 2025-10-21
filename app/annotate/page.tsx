@@ -5,15 +5,28 @@ import react, { useState, useEffect } from 'react'
 import { useRouter } from "next/navigation";
 import { skip } from "node:test";
 import "./annotate.css";
+import TweetAnnotation from "../components/TweetAnnotation";
+import Toast from "../components/Toast";
 
 const AnnotationPage = () => {
     const router = useRouter();
+    const [score, setScore] = useState("")
+    const [userData, setData] = useState<any>({})
+    const [tweet, setTweet] = useState<any>({})
+    const [progress, setProgress] = useState(0)
+    const [isAnimating, setIsAnimating] = useState(false)
+    const [showToast, setShowToast] = useState(false)
+    const [isBlurred, setIsBlurred] = useState(false)
 
     useEffect(() => {
         console.log(localStorage.getItem('userID'))
         const userID = localStorage.getItem('userID')
         if (userID == null) {
-            router.push('/')
+            setIsBlurred(true)
+            setShowToast(true)
+            setTimeout(() => {
+                router.push('/')
+            }, 3000) // Extended to 3 seconds
         } else {
             try {
                 fetchUser(userID)
@@ -30,7 +43,6 @@ const AnnotationPage = () => {
         console.log(finalData.users)
         if (finalData.users == null){
             alert("something went wrong")
-            //localStorage.clear()
             router.push('/')
         }
         setData(finalData.users)
@@ -42,10 +54,6 @@ const AnnotationPage = () => {
         setTweet(finalTweet.tweets)
     }
 
-    const [score, setScore] = useState("")
-    const [userData, setData] = useState<any>({})
-    const [tweet, setTweet] = useState<any>({})
-
     const skip = async () => {
         fetchTweet()
     }
@@ -56,6 +64,8 @@ const AnnotationPage = () => {
         } else {
             const userID = localStorage.getItem('userID')
             if (userID) {
+                setIsAnimating(true)
+                
                 await fetch("/api/tweet", {
                     method: "PATCH",
                     headers: {
@@ -77,52 +87,84 @@ const AnnotationPage = () => {
                     }),
                 })
 
+                const newProgress = (userData.label_Count % 100) + 1
+                setProgress(newProgress)
+                
                 fetchUser(userID)
                 fetchTweet()
                 setScore("")
+                
+                setTimeout(() => setIsAnimating(false), 1000)
             }
         }
     }
 
     return (
-        <div className='annotation-page'>
-            <div className = "annotation-card">
-                <div className = "annotation-avatar"></div>
-                <div className = "annotation-content">
-                    <div className = "annotation-header">
-                        <span className = "annotation-name">Anonymous</span>
-                        <span className = "annotation-handle">@Anonymous</span>
-                        <span className = "annotation-date">Month DD</span>
+        <>
+            {/* Toast notification - outside of blurred content */}
+            {showToast && (
+                <Toast 
+                    message="You need to login first" 
+                    type="error" 
+                    onClose={() => setShowToast(false)}
+                />
+            )}
+
+            {/* Blur overlay - separate from main content */}
+            {isBlurred && (
+                <div className="blur-overlay">
+                    <div className="blur-content">
+                        <h2>Access Denied</h2>
+                        <p>Please log in to access the annotation page</p>
+                        <div className="loading-spinner"></div>
                     </div>
-                    <div id="tweetHolder">{tweet.content}</div>
+                </div>
+            )}
+
+            {/* Main content - this gets blurred */}
+            <div className={`annotation-page ${isBlurred ? 'annotation-page--blurred' : ''}`}>
+                <div className="progress-container">
+                    <div className="progress-bar">
+                        <div 
+                            className={`progress-fill ${isAnimating ? 'progress-animating' : ''}`}
+                            style={{ width: `${(progress / 100) * 100}%` }}
+                        ></div>
+                    </div>
+                    <div className="progress-text">
+                        {progress}/100 tweets annotated
+                    </div>
+                </div>
+
+                <div className="tweet-container">
+                    <TweetAnnotation tweetText={tweet.content} />
+                </div>
+
+                <h4>Please rate this tweet based on the positivity/negativity of it's tone.</h4>
+                <div className = "annotation-rating">
+                    {[
+                        {value: "1", label: "Very Negative"},
+                        {value: "2", label: "Negative"},
+                        {value: "3", label: "Somewhat Negative"},
+                        {value: "4", label: "Neutral"},
+                        {value: "5", label: "Somewhat Positive"},
+                        {value: "6", label: "Positive"},
+                        {value: "7", label: "Very Positive"},
+                    ].map((option) => (
+                        <label key={option.value} className="rating-option">
+                            <input type = "radio" name = "rating" value = {option.value} checked = {score===option.value} onChange={(e) => setScore(e.target.value)}/>
+                            {option.label}
+                        </label>
+                    ))}
+                </div>
+                <div className="annotation-progress">
+                    Progress: {userData.label_Count % 100 || null}/100
+                </div>
+                <div className="annotation-buttons">
+                    <button className="annotation-btn annotation-btn--primary" onClick={loadTweet}>next</button>
+                    <button className="annotation-btn annotation-btn--secondary" onClick={skip}>skip</button>
                 </div>
             </div>
-            <h3>Please rate this tweet based on the positivity/negativity of it's tone.</h3>
-            <h3>Click one of the circles to select the rating and press the next button to submit and move to the next tweet</h3>
-            <div className = "annotation-rating">
-                {[
-                    {value: "1", label: "Very Negative"},
-                    {value: "2", label: "Negative"},
-                    {value: "3", label: "Somewhat Negative"},
-                    {value: "4", label: "Neutral"},
-                    {value: "5", label: "Somewhat Positive"},
-                    {value: "6", label: "Positive"},
-                    {value: "7", label: "Very Positive"},
-                ].map((option) => (
-                    <label key={option.value} className="rating-option">
-                        <input type = "radio" name = "rating" value = {option.value} checked = {score===option.value} onChange={(e) => setScore(e.target.value)}/>
-                        {option.label}
-                    </label>
-                ))}
-            </div>
-            <div className="annotation-progress">
-                Progress: {userData.label_Count % 100 || null}/100
-            </div>
-            <div className="annotation-buttons">
-                <button className="annotation-btn annotation-btn--primary" onClick={loadTweet}>next</button>
-                <button id="annotation-btn annotation-btn--primary" onClick={skip}>skip</button>
-            </div>
-        </div>
+        </>
     );
 }
 

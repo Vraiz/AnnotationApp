@@ -1,5 +1,4 @@
 "use client";
-import React, { useState } from "react";
 import styles from "./TweetAnnotation.module.css";
 
 interface TweetAnnotationProps {
@@ -9,12 +8,6 @@ interface TweetAnnotationProps {
 const TweetAnnotation: React.FC<TweetAnnotationProps> = ({
   tweetText = "This is a sample tweet with emojis 😊🔥",
 }) => {
-  const [sentiment, setSentiment] = useState("");
-
-  const handleSentimentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSentiment(e.target.value);
-  };
-
   return (
     <>
     <div className={styles.tweetCard}>
@@ -32,29 +25,6 @@ const TweetAnnotation: React.FC<TweetAnnotationProps> = ({
       <p className={styles.tweetContent}>{tweetText}</p>
     </div>
     <br/>
-    <div className={styles.surveySection}>
-    <h4>Please rate the tweet based on the possible emotions of the user:</h4>
-    <div className={styles.radioGroup}>
-      {[
-        "Strongly Negative",
-        "Negative",
-        "Neutral",
-        "Positive",
-        "Strongly Positive",
-      ].map((label) => (
-        <label key={label} className={styles.radioLabel}>
-          <input
-            type="radio"
-            name="sentiment"
-            value={label}
-            checked={sentiment === label}
-            onChange={handleSentimentChange}
-          />
-          {label}
-        </label>
-      ))}
-    </div>
-  </div>
   </>
   );
 };
