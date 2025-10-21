@@ -1,158 +1,107 @@
 'use client'
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'
+import TweetAnnotation from "./components/TweetAnnotation";
+import LoginModal from './components/LoginModal'
+import RegisterModal from './components/RegisterModal'
 import styles from './page.module.css';
 
 export default function Home() {
 
-  const router = useRouter();
+    const [showModal, setShowModal] = useState(true)
+    const [showRegister, setShowRegister] = useState(false)
 
-  const [linkValue, setLink] = useState("/Login")
-
-  useEffect(() => {
-    const userID = localStorage.getItem('userID');
-    if (userID != null) {
-      router.push('/annotate');
+    const handleClose = () => {
+        setShowModal(false)
+        router.push('/') // redirect to homepage when closing
     }
-  }, []);
 
-  return (
-    <>
+    const router = useRouter();
+    const [linkValue, setLink] = useState("/Login")
 
-      {/* Hero Section */}
-      <main className={styles.hero}>
-      <section className={styles.heroLeft}>
-        <div className={styles.heroText}>
-          <h1 className={styles.heroTitle}>Emoji Annotation</h1>
-          <p className={styles.heroSubtitle}>Help us annotate emojis for Filipino NLP</p>
-        </div>
+    useEffect(() => {
+        const userID = localStorage.getItem('userID');
+        if (userID != null) {
+        router.push('/annotate');
+        }
+    }, []);
 
-        <div className={styles.heroButtons}>
-          <button className={styles.btnOutline} onClick = {() => {router.push("/Login")}}>
-            ⭐ Get Started
-          </button>
-        </div>
-      </section>
+    return (
+    <main>
+        <section className="content">
+        <h1>Greetings!</h1>
+        <p>
+            We are 4th year DLSU students looking for <strong>particpants </strong>
+            that can help us with our research titled:
+            
+            <br/><br/>
+            <strong>
+            "Developing a Culturally Adapted Emoji Sentiment Lexicon for the 
+            Philippine Context: Creation, Application, and Comparative Analysis"
+            </strong>{" "}
+            <br/><br/>
+            Developing Filipino NLP technologies and research helps to progress 
+            understanding and further research into the Filipino language and improve related technologies 
+            (i.e. chat bots, spam filters, and grammar checkers). As thanks for your efforts,<strong> a small monetary 
+            compensation</strong> will be provided based on the amount of tweets annotated.
+        </p>
 
-      <section className={styles.heroRight}>
-        <img
-          src="/laugh.png"
-          alt="Emoji"
-          className={styles.heroImage}
-        />
+        <p>
+            Before starting the experiment, please make sure to read the following
+            instructions carefully.
+        </p>
 
-        <div className={styles.radioGroup}>
-          <label>
-            <input type="radio" name="sentiment" /> Negative
-          </label>
-          <label>
-            <input type="radio" name="sentiment" /> Neutral
-          </label>
-          <label>
-            <input type="radio" name="sentiment" /> Positive
-          </label>
-        </div>
-      </section>
+        <h2>Instructions:</h2>
+        <ol>
+            <li>
+                Click the "Get Started" button to register an account or log in if you already have one.
+            </li>
+            <li>
+                Answer the consent form to proceed to the experiment. 
+            </li>
+            <TweetAnnotation tweetText="I can’t believe how fun this was! 😄" />
+            <button className="sample-submit">
+            Submit
+            </button>
+            <li>Annotate the tweet based on your own interpretation. Answers only range from Strongly Negative to Strongly Positive. If you are unsure, you can answer neutral.</li>
+            <li>
+                After submitting your annotation, you will be presented with a new tweet to annotate. 
+                Continue annotating tweets until you decide to stop.
+            </li>
+            <li>
+                There is a progress bar at the top right of the page to help you keep track of how many tweets you have annotated. There is an <strong>monetary incentive </strong> for
+                completing a number of annotations.
+            </li>
+        </ol>
+        <button className="btn-primary" onClick={() => setShowRegister(true)}>
+            Get Started
+        </button>
+        <h2>About Our Research</h2>
+        <p>
+            We are 4th year students in De La Salle University researching Natural
+            Language Processing (NLP) — specifically how Filipino social media
+            shapes the sentiment of emojis. We aim to identify characteristic
+            patterns and trends that define how Filipinos use emojis compared to
+            users from other cultures and nations. This research contributes to
+            the growing pool of Filipino NLP resources.
+        </p>
+
+        <h2>Why Participate in Our Research</h2>
+        <p>
+            Contributing to our research in Filipino Natural Language Processing
+            (NLP) helps open new opportunities for further research and technology
+            development. Advancing Filipino NLP supports better understanding and
+            applications in the Filipino language — including chatbots, spam
+            filters, and grammar checkers. As a token of appreciation,
+            participants will receive small monetary compensation based on the
+            number of tweets annotated.
+        </p>
+        </section>
+
+        {/* Modals */}
+        {showModal && <LoginModal onClose={handleClose} />}
+        {showRegister && <RegisterModal onClose={() => setShowRegister(false)} />}
     </main>
-
-
-
-      {/* Research Section */}
-      <section className={styles.researchSection}>
-      <div className={styles.researchLeft}>
-        <h2 className={styles.researchHeading}>Why Participate in Our Research?</h2>
-        <h3 className={styles.researchSubheading}>
-          Anyone with Filipino citizenship can join!
-        </h3>
-        <p className={styles.researchText}>
-          Our research focuses on annotating emojis to make Filipino Natural
-          Language Processing (NLP) more accurate and culturally aware.
-        </p>
-        <p className={styles.researchText}>
-          By joining, you’ll help develop technology that better understands Filipino
-          language, emotions, and communication styles — improving chatbots,
-          sentiment analysis, and more.
-        </p>
-      </div>
-
-      <div className={styles.researchRight}>
-        <img
-          src="/think.png"
-          alt="Research illustration"
-          className={styles.researchImage}
-        />
-      </div>
-    </section>
-
-
-    <section className={styles.researchSection}>
-      <div className={`${styles.researchRow} ${styles.reverse}`}>
-        <div className={styles.textBlock}>
-          <h2>About our Research</h2>
-          <p className={styles.subtext}>We are 4th year students in DLSU</p>
-          <p>
-            Body text for your whole article or post. We’ll put in some lorem ipsum to show
-            how a filled-out page might look:
-          </p>
-          <p>
-            Excetupeur efficient emerging, minim veniam anim aute carefully curated Ginza
-            conversation exquisite perfect nostrud nisi intricate content.
-          </p>
-        </div>
-
-        <div className={styles.imagePlaceholder}></div>
-      </div>
-    </section>
-
-
-
-    <section className={styles.meetResearchers}>
-      <h2>Meet the Researchers</h2>
-      <p className={styles.subtext}>from DLSU</p>
-
-      <div className={styles.researcherGrid}>
-        <div className={styles.researcherCard}>
-          <div className={styles.imagePlaceholder}></div>
-          <div>
-            <h3>Adi Miranda</h3>
-            <p>Body text for whatever you'd like to say.</p>
-          </div>
-        </div>
-
-        <div className={styles.researcherCard}>
-          <div className={styles.imagePlaceholder}></div>
-          <div>
-            <h3>Ron Cajumban</h3>
-            <p>Body text for whatever you'd like to say.</p>
-          </div>
-        </div>
-
-        <div className={styles.researcherCard}>
-          <div className={styles.imagePlaceholder}></div>
-          <div>
-            <h3>Railey Singson</h3>
-            <p>Body text for whatever you'd like to say.</p>
-          </div>
-        </div>
-
-        <div className={styles.researcherCard}>
-          <div className={styles.imagePlaceholder}></div>
-          <div>
-            <h3>Isaac Javid</h3>
-            <p>Body text for whatever you'd like to say.</p>
-          </div>
-        </div>
-
-        <div className={styles.researcherCard}>
-          <div className={styles.imagePlaceholder}></div>
-          <div>
-            <h3>Ed Tighe</h3>
-            <p>Body text for whatever you'd like to say.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    </>
   );
 }

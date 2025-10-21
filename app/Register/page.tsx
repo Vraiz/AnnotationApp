@@ -1,14 +1,11 @@
 'use client'
-import react, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Link from "next/link";
-import "./register.css";
-
-
+import Link from "next/link"
+import "./register.css"
 
 const Register = () => {
     const router = useRouter();
-
 
     const [fName, setFName] = useState("")
     const [lName, setLName] = useState("")
@@ -21,95 +18,109 @@ const Register = () => {
     const [isFluent, setIsFluent] = useState(false)
 
     const finishQuiz = async () => {
-        if(fName && lName && age && sex && email && password && confirmPassword && password == confirmPassword && isFilipino && isFluent){
-            try{
+        if (fName && lName && age && sex && email && password && confirmPassword && password === confirmPassword && isFilipino && isFluent) {
+            try {
                 const response = await fetch("/api/user", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    first_Name: fName,
-                    last_Name: lName,
-                    age: age,
-                    sex: sex,
-                    email: email,
-                    password: password
-                }),
-                }).then(async data => {
-                    let test = await data.json()
-                    if(test.message == "user with email already exists"){
-                        alert("user with email already exists")
-                    } else {
-                        localStorage.setItem('userID', test.user._id);
-                        if(data.status == 201){
-                        router.push('/annotate')
-                    }
-                    }
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        first_Name: fName,
+                        last_Name: lName,
+                        age: age,
+                        sex: sex,
+                        email: email,
+                        password: password
+                    }),
+                });
 
-                })
-            }catch (e){
-                alert("Something went wrong with the server")
+                const data = await response.json();
+
+                if (data.message === "user with email already exists") {
+                    alert("User with this email already exists.");
+                } else {
+                    localStorage.setItem('userID', data.user._id);
+                    if (response.status === 201) {
+                        router.push('/annotate');
+                    }
+                }
+            } catch (e) {
+                alert("Something went wrong with the server.");
             }
-            
         } else {
-            alert("Please fill up all fields")
+            alert("Please fill up all fields correctly.");
         }
-    }   
+    };
 
-    return(
-        <div className = "register-bg">
-            <div id='register_main'>
+    return (
+        <div className="register-container">
+            <div className="register-form">
                 <h1>Account Registration</h1>
-                <div className='input-row'>
-                    <div className = 'input-group'>
-                        <h3>First Name: </h3>
-                        <input type="text" name='fName' placeholder='First Name' value={fName} onChange={(e) => setFName(e.target.value)}/>    
+
+                <div className="name-row">
+                    <div className="input-group">
+                        <label>First Name</label>
+                        <input type="text" value={fName} onChange={(e) => setFName(e.target.value)} placeholder="First Name" />
                     </div>
-                    <div className='input-group'>
-                        <h3>Last Name: </h3>
-                        <input type="text" name='lName' placeholder='Last Name' value={lName} onChange={(e) => setLName(e.target.value)}/>   
+
+                    <div className="input-group">
+                        <label>Last Name</label>
+                        <input type="text" value={lName} onChange={(e) => setLName(e.target.value)} placeholder="Last Name" />
                     </div>
                 </div>
-                <div className="input-row">
-                <div className='input-group'>
-                    <h3>Gender:</h3>
-                        <select id="Sex" name="Sex" value={sex} onChange={(e) => setSex(e.target.value)}>
-                        <option hidden>Gender</option>
-                        <option value="m">Male</option>
-                        <option value="f">Female</option>
+
+                <div className="name-row">
+                    <div className="input-group">
+                        <label>Gender</label>
+                        <select value={sex} onChange={(e) => setSex(e.target.value)}>
+                            <option hidden>Gender</option>
+                            <option value="m">Male</option>
+                            <option value="f">Female</option>
                         </select>
                     </div>
-                    <div className='input-group'>
-                        <h3>Age: </h3>
-                        <input type="number" name='age' placeholder='age' value={age} onChange={(e) => setAge(e.target.value)}/>
+
+                    <div className="input-group">
+                        <label>Age</label>
+                        <input type="number" value={age} onChange={(e) => setAge(e.target.value)} placeholder="Age" />
                     </div>
                 </div>
-                <div className='input-group'>
-                    <h3>Email: </h3>
-                    <input type="email" name='email' placeholder='example.com' value={email} onChange={(e) => setEmail(e.target.value)}/>
+
+                <div className="input-group">
+                    <label>Email</label>
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="example@email.com" />
                 </div>
-                <div className='input-group'>
-                    <h3>Password: </h3>
-                    <input type="password" name='password' placeholder='' value={password} onChange={(e) => setPassword(e.target.value)}/>
+
+                <div className="input-group">
+                    <label>Password</label>
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="********" />
                 </div>
-                <div className='input-group'>
-                    <h3>Confirm Password: </h3>
-                    <input type="password" name='confirmPassword' placeholder='' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+
+                <div className="input-group">
+                    <label>Confirm Password</label>
+                    <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="********" />
                 </div>
+
                 <div className="checkbox-group">
                     <label>
-                        <input type="checkbox" checked={isFilipino} onChange={(e) => setIsFilipino(e.target.checked)}/>{" "} Are you a Filipino citizen?
+                        <input type="checkbox" checked={isFilipino} onChange={(e) => setIsFilipino(e.target.checked)} />
+                        Are you a Filipino Citizen?
                     </label>
+
                     <label>
-                        <input type="checkbox" checked={isFluent} onChange={(e) => setIsFluent(e.target.checked)}/> Can you read/speak both Filipino and English fluently?
+                        <input type="checkbox" checked={isFluent} onChange={(e) => setIsFluent(e.target.checked)} />
+                        Can you read/speak both Filipino and English fluently?
                     </label>
                 </div>
-                <button className='register-button' onClick={finishQuiz}>Register</button>
-                <Link className='login-link' href="/Login">Already have an account? Log in here!</Link>
+
+                <button className="register-button" onClick={finishQuiz}>Register</button>
+
+                <Link className="login-link" href="/Login">
+                    Already have an account? Log in here!
+                </Link>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Register
+export default Register;
