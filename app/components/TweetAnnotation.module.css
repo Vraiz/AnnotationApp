@@ -1,0 +1,101 @@
+.annotationContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 2rem auto;
+  color: #eaeaea;
+  font-family: system-ui, sans-serif;
+}
+
+/* Tweet section */
+.tweetCard {
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.tweetHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.tweetAvatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.tweetUser span {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.tweetContent {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* Survey section */
+.surveyCard {
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 550px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.surveyCard h4 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.radioGroup {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.radioLabel:hover {
+  background-color: #3a3a3a;
+}
+
+.radioLabel input[type="radio"] {
+  accent-color: #888;
+  transform: scale(1.2);
+}
+
+.btn-sample-submit {
+    background-color: #5a5959; /* Deep blue tone */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 32px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: block;
+    margin: 40px auto; /* centers the button horizontally */
+}
+

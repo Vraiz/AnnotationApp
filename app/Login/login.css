@@ -1,0 +1,76 @@
+.login-bg {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: url('/4912244.jpg') center/cover no-repeat;
+    left: 0;
+    top: 0px;
+    filter: blur(5.65px);
+}
+
+.quiz_main{
+    width: 80%;
+    max-width: 561px;
+    min-width: 200px;
+    background: white;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    box-sizing: border-box;
+    margin-left: 50%;
+    margin-top: 55vh;
+    transform: translate(-50%, -50%);
+    position: fixed;
+}
+
+.quiz_main h1 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 120%;
+  text-align: right;
+  letter-spacing: -0.02em;
+  color: #000;
+  margin: 0;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.input-group label{
+    font-size: 16px;
+    line-height: 140%;
+    color: #1e1e1e; 
+}
+
+.input-group input {
+  width: 95%;
+  padding: 12px 16px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 100%;
+  color: #1e1e1e;
+}
+
+#log-button {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #2c2c2c;
+  border-radius: 8px;
+  background: #2c2c2c;
+  color: #f5f5f5;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#log-button:hover {
+  background: #3d3d3d;
+}

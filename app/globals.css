@@ -1,94 +1,291 @@
-@import "tailwindcss";
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --darkergrey: #f6f6f752;
+  --darkergrey: #23232352;
 }
 
-@theme inline {
+/* @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-mono: var(--font-geist-mono); */
+/* } */
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #0a0a0a;
   }
 }
 
-
-body {
-  color: var(--foreground);
-  background-color: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
 button {
-  display: inline-block;
-  outline: 0;
-  cursor: pointer;
-  text-align: center;
-  border: 1px solid var(--foreground);
-  padding: 11px 24px;
-  min-height: 44px;
-  min-width: 44px;
-  color: var(--background);
-  background: var(--foreground);
-  border-radius: 4px;
+  font-family: inherit;
+}
+body {
+  background-color: #121212;
+  color: #e5e5e5;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.7;
+}
+
+/* NAVBAR */
+.navbar {
+  background-color: #181818;
+  border-bottom: 1px solid #2a2a2a;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon {
+  color: #e63946;
+  font-size: 1.3rem;
+}
+
+.nav-title {
+  font-weight: 600;
+  color: #f1f1f1;
+  font-size: 1rem;
+}
+
+.navbar-right {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar-right a {
+  color: #e5e5e5;
+  text-decoration: none;
   font-weight: 500;
-  font-size: 14px;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px 0px;
+  transition: color 0.2s ease;
 }
 
-button:hover {
-      border: 1px solid var(--darkergrey);
-      background: var(--darkergrey);
-      outline: 1px solid transparent;
-      transition-duration: 250ms;
-  }  
-
-input {
-  margin-left: 2vw;
+.navbar-right a:hover {
+  color: #7f8cff;
 }
 
-option {
-  background: var(--background);
+
+/* CONTENT */
+.content {
+  max-width: 720px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.content h1 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+.content h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-top: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.content p {
+  margin-bottom: 1rem;
+  color: #d0d0d0;
+}
+
+.content a {
+  color: #5da8ff;
+  text-decoration: none;
+}
+
+.content a:hover {
+  text-decoration: underline;
+}
+
+.content ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.content ol li {
+  margin-bottom: 0.8rem;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 3rem;
+  padding-bottom: 2rem;
+}
+
+/* BUTTONS */
+.sample-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.sample-submit {
+  background-color: #1b1d1b; /* Deep blue tone */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: block;
+ 
+}
+
+.sample-submit:hover {
+  background-color: #4b5563; /* slightly lighter blue */
+  transform: translateY(-2px);
+}
+
+.sample-skip {
+  background-color: #1b1d1b; /* Deep blue tone */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: block;
+}
+
+.sample-skip:hover {
+  background-color: #4b5563; /* Lighter grey on hover */
+  border-color: #4b5563;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(55, 65, 81, 0.3);
+}
+
+.btn-primary {
+  background-color: #3c702c; /* Deep blue tone */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: block;
+  /* margin: 40px auto; centers the button horizontally */
+  /* width:fit-content; */
+}
+
+.btn-primary:hover {
+  background-color: #498636; /* slightly lighter blue */
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  background-color: #3c702c; /* darker tone when clicked */
+  transform: translateY(0);
+}
+
+/*Radio group*/
+.radioGroup {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.radioLabel:hover {
+  background-color: #3a3a3a;
+}
+
+.radioLabel input[type="radio"] {
+  accent-color: #888;
+  transform: scale(1.2);
+}
+
+#choice {
+  margin-left: 0vw;
+}
+
+#welcome{
+  margin-top: 5vh;
+  margin-bottom: 5vh;
 }
 
 #home_main {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#quiz_main {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
+#inq{
+  margin: 5vh;
 }
 
+#home_text {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  max-width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1vh;
+}
 
 #quiz_div {
   margin-top: 1vh;
   justify-content: center;
   align-items: center;
+  width: 18vw;
 }
 
-#holder {
-  display: inline-block;
-  justify-content: center;
-  align-items: center;
+#gender_div {
+  margin-top: 1vh;
+  width: 18vw;
+
 }
 
 #likert
 {
   display: flex;
-  margin: 0 auto;
+  justify-content: space-between;
+  min-width: 45vw;
+}
+
+#nextButton{
+  margin-top: 2vh;
 }
 
 #option {
@@ -97,11 +294,27 @@ option {
 
 #tweet {
   text-align: center;
-  margin-top: 3vh;
-  margin-bottom: 5vh;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
 }
 
 #legend {
   text-align: center;
+  margin-bottom: 3vh;
+}
+
+#thank_text {
+  max-width: 60vw;
+  text-align: center;
+  margin-top: 5vh;
+}
+
+#quiz_button {
+  margin: 2vh;
+}
+
+#quiz_link {
+  margin: 3vh;
+  text-decoration: underline;
 }
   

@@ -24,7 +24,7 @@ export const GET = async (request: Request) => {
 
   } catch (error) {
     return NextResponse.json({
-      message: "An error occurred whilst fetchin users"
+      message: error
     }, { status: 500 });
   }
 };
@@ -53,9 +53,9 @@ export const POST = async (request: Request) => {
   try {
     connectDatabase();
 
-    const {first_Name, last_Name, age, sex} = await request.json();
+    const {first_Name, last_Name, age, sex, email, password} = await request.json();
 
-    const newUser = await user.postUser(first_Name, last_Name, age, sex);
+    const newUser = await user.register(first_Name, last_Name, age, sex, email, password);
 
     return NextResponse.json({
       message: "Successfully poster user",
@@ -64,7 +64,7 @@ export const POST = async (request: Request) => {
 
   } catch (error) {
     return NextResponse.json({
-      message: "An error occurred whilst posting user"
+      message: error.message
     }, { status: 500 });
   }
 };
