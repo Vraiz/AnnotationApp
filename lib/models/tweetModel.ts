@@ -8,10 +8,6 @@ interface tweetModel extends Model<ITweet> {
 }
 
 const tweetSchema = new Schema<ITweet>({
-    id:{
-        type:Number,
-        required:true
-    },
     content:{
         type:String,
         required:true

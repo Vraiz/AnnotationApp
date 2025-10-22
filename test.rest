@@ -6,7 +6,7 @@ PATCH http://localhost:3000/api/tweet
 Content-Type: application/json
 
 {
-    "id": "68e3dd83f59e2966d34d4444",
+    "id": "68f86d22530e0eb6cd316d1d",
     "newLabel": 7
 }
 
