@@ -46,6 +46,8 @@ const AnnotationPage = () => {
             router.push('/')
         }
         setData(finalData.users)
+        const initialCount = typeof finalData.users?.label_Count === 'number' ? finalData.users.label_Count : 0
+        setProgress(initialCount % 100)
     }
 
     async function fetchTweet() {
@@ -157,7 +159,7 @@ const AnnotationPage = () => {
                     ))}
                 </div>
                 <div className="annotation-progress">
-                    Progress: {userData.label_Count % 100 || null}/100
+                    Progress: {progress}/100
                 </div>
                 <div className="annotation-buttons">
                     <button className="annotation-btn annotation-btn--primary" onClick={loadTweet}>next</button>
