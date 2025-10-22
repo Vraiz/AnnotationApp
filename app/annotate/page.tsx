@@ -1,7 +1,5 @@
 'use client'
-import Link from "next/link";
-import Image from "next/image";
-import react, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from "next/navigation";
 import { skip } from "node:test";
 import "./annotate.css";
