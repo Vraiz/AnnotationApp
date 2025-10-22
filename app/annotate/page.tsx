@@ -26,7 +26,7 @@ const AnnotationPage = () => {
             setShowToast(true)
             setTimeout(() => {
                 router.push('/')
-            }, 3000) // Extended to 3 seconds
+            }, 3000) 
         } else {
             try {
                 fetchUser(userID)

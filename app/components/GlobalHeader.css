@@ -34,4 +34,14 @@
   .nav-login-btn:hover {
     color: #66cc99;
   }
+
+.disabled-link {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.disabled-link:hover {
+  text-decoration: none;
+}
   
