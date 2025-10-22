@@ -1,0 +1,36 @@
+GET http://localhost:3001/api/tweet
+
+###
+
+PATCH http://localhost:3001/api/tweet
+Content-Type: application/json
+
+{
+    "id": "68dced8e6c5797dc743b9c46",
+    "newLabel": 1
+}
+
+###
+GET http://localhost:3001/api/user?id=68dd0047747b63e5dc91d56e
+
+
+
+###
+POST http://localhost:3001/api/user
+Content-Type: application/json
+
+{
+    "first_Name": "Testa",
+    "last_Name": "Test",
+    "age": 21,
+    "sex": "m"
+}
+
+###
+POST http://localhost:3001/api/user
+Content-Type: application/json
+
+{
+    "id": "68dd0047747b63e5dc91d56e"
+
+}
