@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useLoginModal } from "../hooks/useLoginModal";
 import { useState, useEffect } from "react";
 import "./GlobalHeader.css";
+import { Router } from "next/router";
+import { useRouter } from 'next/navigation'
 
 export default function GlobalHeader() {
   const loginModal = useLoginModal();
@@ -15,23 +17,7 @@ export default function GlobalHeader() {
     setIsLoggedIn(!!userID);
   }, []);
 
-  // Listen for storage changes to update login state when user logs in
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const userID = localStorage.getItem('userID');
-      setIsLoggedIn(!!userID);
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    
-    // Also listen for custom events (for same-tab login)
-    window.addEventListener('userLogin', handleStorageChange);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('userLogin', handleStorageChange);
-    };
-  }, []);
+  const router = useRouter();
 
   const handleAnnotateClick = (e: React.MouseEvent) => {
     if (!isLoggedIn) {
@@ -39,6 +25,14 @@ export default function GlobalHeader() {
       loginModal.open(); // Open login modal instead
     }
   };
+
+  const logout = async () => {
+    
+    localStorage.removeItem('userID')
+    setIsLoggedIn(false)
+    router.push('/')
+    
+  }
 
   return (
     <nav className="navbar">
@@ -56,8 +50,8 @@ export default function GlobalHeader() {
           Annotate
         </Link>
         <Link href="/about">About</Link>
-        <button onClick={loginModal.open} className="nav-login-btn">
-          Login
+        <button onClick={!isLoggedIn ? loginModal.open : logout} className="nav-login-btn">
+          {!isLoggedIn ? "Login" : "Logout"}
         </button>
       </div>
     </nav>

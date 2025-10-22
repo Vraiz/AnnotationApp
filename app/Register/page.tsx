@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from "next/link"
 import "./register.css"
@@ -16,6 +16,13 @@ const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState("")
     const [isFilipino, setIsFilipino] = useState(false)
     const [isFluent, setIsFluent] = useState(false)
+
+    useEffect(() => {
+        const userID = localStorage.getItem('userID');
+        if (userID != null) {
+        router.push('/');
+        }
+    }, []);
 
     const finishQuiz = async () => {
         if (fName && lName && age && sex && email && password && confirmPassword && password === confirmPassword && isFilipino && isFluent) {

@@ -10,14 +10,39 @@ export default function Home() {
 
     const [showRegister, setShowRegister] = useState(false)
     const [sentiment, setSentiment] = useState("")
+    const [tweet, setTweet] = useState<any>({})
 
     const router = useRouter();
     const [linkValue, setLink] = useState("/Login")
+    const [status, setStatus] = useState(false)
 
     const handleSentimentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSentiment(e.target.value);
     };
+
+    useEffect(() => {
+        const userID = localStorage.getItem('userID');
+        if (userID!= null){
+          setStatus(true)
+        }
+    }, []);
+
+    const register = async () => {
     
+      if(status){
+        router.push("/annotate")
+      }else{
+        setShowRegister(true)
+      }
+    }
+
+
+    const fetchTweet = async () => {
+        const tweetResponse = await fetch("/api/tweet")
+        const finalTweet = await tweetResponse.json()
+        setTweet(finalTweet.tweets)
+    }
+
     return (
     <main>
         <section className="content">
@@ -51,7 +76,7 @@ export default function Home() {
             <li>
                 After registering, read and answer the <strong>consent form </strong>to proceed to the experiment. 
             </li>
-            <TweetAnnotation tweetText="I can’t believe how fun this was! 😄" />
+            <TweetAnnotation tweetText={tweet.content} />
             <div className={styles.surveySection}>
             <h4>Please rate this tweet based on the positivity/negativity of it's tone:</h4>
             <div className={styles.radioGroup}>
@@ -76,10 +101,10 @@ export default function Home() {
                 </div>
             </div>
             <div className="sample-buttons">
-            <button className="sample-skip">
+            <button className="sample-skip" onClick={fetchTweet}>
             skip
             </button>
-            <button className="sample-submit">
+            <button className="sample-submit" onClick={fetchTweet}>
             next
             </button>
             </div>
@@ -92,8 +117,11 @@ export default function Home() {
                 There is a progress bar at the top of the page to help you keep track of how many tweets you have annotated. There is an <strong>monetary incentive </strong> for
                 completing <strong>100 annotations.</strong>
             </li>
+            <li>
+                Tweets <strong>_USER_</strong> or <strong>_LINK_</strong> had the user/link redacted for privacy and safety reasons
+            </li>
         </ol>
-        <button className="btn-primary" onClick={() => setShowRegister(true)}>
+        <button className="btn-primary" onClick={register}>
             Get Started
         </button>
         <h2>About Our Research</h2>
