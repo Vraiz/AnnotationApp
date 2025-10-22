@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useToast } from './providers/ToastProvider'
 
 interface LoginModalProps {
   onClose: () => void
@@ -8,12 +9,13 @@ interface LoginModalProps {
 
 const LoginModal = ({ onClose }: LoginModalProps) => {
   const router = useRouter()
+  const { showToast } = useToast()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const handleLogin = async () => {
     if (!email || !password) {
-      alert('Please fill in all fields')
+      showToast('Please fill in all fields', 'error')
       return
     }
 
@@ -27,12 +29,24 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
       const data = await res.json()
       if (res.ok) {
         localStorage.setItem('userID', data.user._id)
+        showToast('Successfully logged in!', 'success')
+        
+        // Dispatch custom event to update other components
+        window.dispatchEvent(new CustomEvent('userLogin'))
+        
+        onClose() // Close the modal
         router.push('/annotate')
       } else {
-        alert(data.message || 'Invalid credentials')
+        showToast(data.message || 'Invalid credentials', 'error')
       }
     } catch (err) {
-      alert('Server error. Please try again later.')
+      showToast('Server error. Please try again later.', 'error')
+    }
+  }
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleLogin()
     }
   }
 
@@ -49,6 +63,7 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
             value={email} 
             onChange={e => setEmail(e.target.value)} 
             placeholder="example@email.com"
+            onKeyPress={handleKeyPress}
           />
         </div>
 
@@ -59,6 +74,7 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
             value={password} 
             onChange={e => setPassword(e.target.value)} 
             placeholder="••••••••"
+            onKeyPress={handleKeyPress}
           />
         </div>
 

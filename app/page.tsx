@@ -17,14 +17,7 @@ export default function Home() {
     const handleSentimentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSentiment(e.target.value);
     };
-
-    useEffect(() => {
-        const userID = localStorage.getItem('userID');
-        if (userID != null) {
-        router.push('/annotate');
-        }
-    }, []);
-
+    
     return (
     <main>
         <section className="content">

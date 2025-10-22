@@ -15,6 +15,24 @@ export default function GlobalHeader() {
     setIsLoggedIn(!!userID);
   }, []);
 
+  // Listen for storage changes to update login state when user logs in
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const userID = localStorage.getItem('userID');
+      setIsLoggedIn(!!userID);
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Also listen for custom events (for same-tab login)
+    window.addEventListener('userLogin', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('userLogin', handleStorageChange);
+    };
+  }, []);
+
   const handleAnnotateClick = (e: React.MouseEvent) => {
     if (!isLoggedIn) {
       e.preventDefault(); // Prevent navigation
