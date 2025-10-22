@@ -15,6 +15,12 @@ export default function GlobalHeader() {
     // Check if user is logged in by checking localStorage
     const userID = localStorage.getItem('userID');
     setIsLoggedIn(!!userID);
+
+    const handleLogin = () => setIsLoggedIn(true);
+    const handleLogout = () => setIsLoggedIn(true);
+
+    window.addEventListener('userLogin', handleLogin);
+    window.addEventListener('userLogout', handleLogout);
   }, []);
 
   const router = useRouter();
@@ -27,11 +33,11 @@ export default function GlobalHeader() {
   };
 
   const logout = async () => {
-    
     localStorage.removeItem('userID')
     setIsLoggedIn(false)
+    window.dispatchEvent(new CustomEvent('userLogout'));
     router.push('/')
-    
+    window.location.reload();
   }
 
   return (

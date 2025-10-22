@@ -35,7 +35,6 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
         window.dispatchEvent(new CustomEvent('userLogin'))
         
         onClose() // Close the modal
-        window.location.reload();
       } else {
         showToast(data.message || 'Invalid credentials', 'error')
       }
