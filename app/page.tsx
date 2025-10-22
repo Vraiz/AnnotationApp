@@ -83,7 +83,12 @@ export default function Home() {
             next
             </button>
             </div>
-            <li>Annotate the tweet based on your own interpretation. Answers only range from strongly negative to strongly positive. If you are unsure, you can skip.</li>
+            <li>
+                Continue on to the <strong>Annotate </strong>page on the <strong>top right.</strong> You will be presented with tweets one at a time. Each tweet contains an emoji, so please take note of the emoji used. 
+            </li>
+            <li>
+                <strong>Annotate </strong>the tweet based on your own interpretation. Answers only range from strongly negative to strongly positive. If you are unsure, you can skip.
+            </li>
             <li>
                 After submitting your annotation, you will be presented with a new tweet to annotate. 
                 Continue annotating tweets until you decide to stop.
